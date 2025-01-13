@@ -9,7 +9,7 @@ ZKSOCIAL leverages zkTLS (Zero-Knowledge Transport Layer Security) to privately 
 stateDiagram-v2
     [*] --> ConnectSocialAccounts
     ConnectSocialAccounts --> VerifyIdentity: User connects Twitter/Telegram
-    VerifyIdentity --> GenerateProof: Realme Protocol
+    VerifyIdentity --> GenerateProof: Reclaim Protocol
     GenerateProof --> CreateWallet: ZK Proof Generated
     CreateWallet --> [*]: Starknet Wallet Created
     
@@ -30,7 +30,7 @@ graph TB
     end
     
     subgraph Core
-        RP[Realme Protocol]
+        RP[Reclaim Protocol]
         ZK[ZK Proof Generator]
         WM[Wallet Manager]
     end
@@ -55,14 +55,14 @@ graph TB
 classDiagram
     class Frontend {
         -walletManager: WalletManager
-        -realmeProtocol: RealmeProtocol
+        -reclaimProtocol: ReclaimProtocol
         +initializeConnection()
         +handleVerification()
         +manageWallet()
         +displayUserInterface()
     }
 
-    class RealmeProtocol {
+    class ReclaimProtocol {
         -zktlsVerifier: ZKTLSVerifier
         -socialConnector: SocialConnector
         +verifySocialAccount()
@@ -87,18 +87,18 @@ classDiagram
         +generateZKProof()
     }
     
-    Frontend --> RealmeProtocol
+    Frontend --> ReclaimProtocol
     Frontend --> WalletManager
-    RealmeProtocol --> SocialConnector
-    RealmeProtocol --> ZKTLSVerifier
-    RealmeProtocol --> WalletManager
+    ReclaimProtocol --> SocialConnector
+   ReclaimProtocol --> ZKTLSVerifier
+    ReclaimProtocol --> WalletManager
 ```
 ### **Sequence Diagram**
 ```mermaid
 sequenceDiagram
     participant U as User
     participant FE as Frontend
-    participant RP as Realme Protocol
+    participant RP as Reclaim Protocol
     participant ZK as ZK Proof Generator
     participant W as Wallet Manager
     
